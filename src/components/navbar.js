@@ -1,1 +1,29 @@
 
+export function Navbar(currentRoute) {
+    const links = [
+      { label: "Personajes", route: "#/characters" },
+      { label: "Episodios", route: "#/episodes" },
+      { label: "Ubicaciones", route: "#/locations" },
+      { label: "Crear personaje", route: "#/create-character" },
+    ];
+  
+    return `
+      <header class="app-header">
+        <h1>Rick and Morty SPA</h1>
+  
+        <nav class="navbar">
+          ${links
+            .map((link) => {
+              const activeClass = currentRoute === link.route ? "active" : "";
+  
+              return `
+                <a href="${link.route}" class="nav-link ${activeClass}">
+                  ${link.label}
+                </a>
+              `;
+            })
+            .join("")}
+        </nav>
+      </header>
+    `;
+  }
