@@ -7,18 +7,18 @@ import { renderCreateCharacterView } from "../views/createCharacterView.js";
 import { renderEditCharacterView } from "../views/editCharacterView.js";
 
 const routes = {
-  "#/characters": renderCharactersView,
-  "#/episodes": renderEpisodesView,
-  "#/locations": renderLocationsView,
-  "#/create-character": renderCreateCharacterView,
-  "#/edit-character": renderEditCharacterView,
+  "#/personajes": renderCharactersView,
+  "#/episodios": renderEpisodesView,
+  "#/locaciones": renderLocationsView,
+  "#/crear-usuario": renderCreateCharacterView,
+  "#/editar-usuario": renderEditCharacterView,
 };
 
 export function initRouter() {
   window.addEventListener("hashchange", renderRoute);
 
   if (!window.location.hash) {
-    window.location.hash = "#/characters";
+    window.location.hash = "#/personajes";
     return;
   }
 

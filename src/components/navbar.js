@@ -1,10 +1,10 @@
 
 export function Navbar(currentRoute) {
     const links = [
-      { label: "Personajes", route: "#/characters" },
-      { label: "Episodios", route: "#/episodes" },
-      { label: "Ubicaciones", route: "#/locations" },
-      { label: "Crear personaje", route: "#/create-character" },
+      { label: "Personajes", route: "#/personajes" },
+      { label: "Episodios", route: "#/episodios" },
+      { label: "Ubicaciones", route: "#/locaciones" },
+      { label: "Crear personaje", route: "#/crear-usuario" },
     ];
   
     return `
