@@ -1,11 +1,12 @@
-import { getCharacters } from "../services/api.js";
+import { appState } from "../services/crud.js";
 import { CharacterCard } from "../components/characterCard.js";
 import { Pagination } from "../components/pagination.js";
 
 let currentPage = 1;
 
 export async function renderCharactersView(container) {
-  const characters = await getCharacters();
+  const characters = appState.characters;
+  console.log("lo que sea", characters);
 
   // Cantidad por página
   const charactersPerPage = 10;
