@@ -26,7 +26,6 @@ export async function saveAppState() {
 
     localStorage.setItem("episodes", JSON.stringify(appState.episodes));
   }
-
   const localLocations = localStorage.getItem("locations");
 
   if (localLocations) {
@@ -42,10 +41,12 @@ export function createCharacterView(name, species, gender, status, imgUrl) {
   const newCharacter = {
     id: Date.now(),
     source: "custom",
-    name: name,
-    species: species,
-    gender: gender,
-    imgUrl: imgUrl,
+    name,
+    species,
+    gender,
+    status,
+    image: imgUrl,
+    origin: { name: "Desconocido" },
   };
 
   appState.characters.unshift(newCharacter);

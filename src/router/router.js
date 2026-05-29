@@ -3,15 +3,11 @@ import { Navbar } from "../components/navbar.js";
 import { renderCharactersView } from "../views/charactersView.js";
 import { renderEpisodesView } from "../views/episodesView.js";
 import { renderLocationsView } from "../views/locationsView.js";
-import { renderCreateCharacterView } from "../views/createCharacterView.js";
-import { renderEditCharacterView } from "../views/editCharacterView.js";
 
 const routes = {
   "#/personajes": renderCharactersView,
   "#/episodios": renderEpisodesView,
   "#/locaciones": renderLocationsView,
-  "#/crear-usuario": renderCreateCharacterView,
-  "#/editar-usuario": renderEditCharacterView,
 };
 
 export function initRouter() {
