@@ -14,16 +14,3 @@ export function formCreateCharacter() {
     createCharacterView(name, species, gender, status, imgUrl);
   });
 }
-
-export function formEditCharacter() {
-  formEdit.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = new FormData(formEdit);
-    const id = data.get("id-character");
-    const name = data.get("new-name");
-    const status = data.get("new-state");
-    console.log(id, name, status);
-
-    editCharacterView(id, name, status);
-  });
-}
