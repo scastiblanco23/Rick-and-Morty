@@ -7,18 +7,14 @@ let currentPage = 1;
 export async function renderEpisodesView(container) {
   const episodes = await getEpisodes();
 
-  // Episodios por página
   const episodesPerPage = 10;
 
-  // Total páginas
   const totalPages = Math.ceil(episodes.length / episodesPerPage);
 
-  // Índices
   const start = (currentPage - 1) * episodesPerPage;
 
   const end = start + episodesPerPage;
 
-  // Episodios paginados
   const paginatedEpisodes = episodes.slice(start, end);
 
   container.innerHTML = `

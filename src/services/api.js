@@ -5,9 +5,7 @@ export async function getCharacters() {
 
   const listaIds = ids.join(",");
 
-  const respuesta = await fetch(
-    `https://rickandmortyapi.com/api/character/${listaIds}`,
-  );
+  const respuesta = await fetch(`${API_BASE_URL}/character/${listaIds}`);
   const todosLosPersonajes = await respuesta.json();
 
   console.log(
@@ -17,11 +15,35 @@ export async function getCharacters() {
 }
 
 export async function getEpisodes() {
-  return [];
+  const ids = Array.from({ length: 51 }, (_, index) => index + 1);
+
+  const listaIds = ids.join(",");
+
+  const respuesta = await fetch(`${API_BASE_URL}/episode/${listaIds}`);
+
+  const todosLosEpisodios = await respuesta.json();
+
+  console.log(
+    `¡Listo! Traídos ${todosLosEpisodios.length} episodios de un solo viaje.`,
+  );
+
+  return todosLosEpisodios;
 }
 
 export async function getLocations() {
-  return [];
+  const ids = Array.from({ length: 126 }, (_, index) => index + 1);
+
+  const listaIds = ids.join(",");
+
+  const respuesta = await fetch(`${API_BASE_URL}/location/${listaIds}`);
+
+  const todasLasLocations = await respuesta.json();
+
+  console.log(
+    `¡Listo! Traídas ${todasLasLocations.length} locations de un solo viaje.`,
+  );
+
+  return todasLasLocations;
 }
 
 export { API_BASE_URL };

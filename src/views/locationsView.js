@@ -7,18 +7,14 @@ const cardsPerPage = 10;
 let currentPage = 1;
 
 export async function renderLocationsView(container) {
-  // TODAS las locations desde localStorage
   const locations = await getLocations();
 
-  // Índices
   const start = (currentPage - 1) * cardsPerPage;
 
   const end = start + cardsPerPage;
 
-  // Locations paginadas
   const currentLocations = locations.slice(start, end);
 
-  // Total páginas
   const totalPages = Math.ceil(locations.length / cardsPerPage);
 
   container.innerHTML = `

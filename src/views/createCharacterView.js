@@ -1,48 +1,78 @@
-export function renderCreateCharacterView(container) {
-  container.innerHTML = `
-      <section>
-        <h1>Crear personaje</h1>
-        <section class="flex justify-center">
-      <form id="form-create" class="border-2 flex flex-col w-70 p-3">
-        <label for="">Nombre</label
-        ><input
-          type="text"
-          name="name"
-          placeholder="nombre del personaje"
-          class="border p-2 mt-3"
-        />
-        <label for="">Especie</label
-        ><input
-          type="text"
-          name="species"
-          placeholder="Especie del personaje"
-          class="border p-2 mt-3"
-        />
-        <label for="">Genero</label
-        ><input
-          type="text"
-          name="gender"
-          placeholder="Genero del personaje"
-          class="border p-2 mt-3"
-        />
-        <label for="">Estado</label
-        ><input
-          type="text"
-          name="status"
-          placeholder="Estado del personaje"
-          class="border p-2 mt-3"
-        />
-        <label for="">imagen url</label
-        ><input
-          type="text"
-          name="imgUrl"
-          placeholder="url de la imagen"
-          class="border p-2 mt-3"
-        />
-        <button class="w-full cursor-pointer">Crear Personaje</button>
-      </form>
-    </section>
+export function renderCreateCharacterView() {
+  return `
+    <div
+      id="create-modal"
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+    >
 
-      </section>
-    `;
+      <div
+        class="bg-white p-6 rounded-xl w-96"
+      >
+
+        <h1 class="text-2xl font-bold mb-4">
+          Crear personaje
+        </h1>
+
+        <form
+          id="form-create"
+          class="flex flex-col gap-3"
+        >
+
+          <label>Nombre</label>
+
+          <input
+            type="text"
+            name="name"
+            placeholder="nombre del personaje"
+            class="border p-2"
+          />
+
+          <label>Especie</label>
+
+          <input
+            type="text"
+            name="species"
+            placeholder="Especie del personaje"
+            class="border p-2"
+          />
+
+          <label>Genero</label>
+
+          <input
+            type="text"
+            name="gender"
+            placeholder="Genero del personaje"
+            class="border p-2"
+          />
+
+          <label>Estado</label>
+
+          <input
+            type="text"
+            name="status"
+            placeholder="Estado del personaje"
+            class="border p-2"
+          />
+
+          <label>Imagen URL</label>
+
+          <input
+            type="text"
+            name="imgUrl"
+            placeholder="url de la imagen"
+            class="border p-2"
+          />
+
+          <button
+            class="bg-green-500 text-white p-2 rounded"
+          >
+            Crear Personaje
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+  `;
 }

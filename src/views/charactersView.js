@@ -8,18 +8,14 @@ export async function renderCharactersView(container) {
   const characters = appState.characters;
   console.log("lo que sea", characters);
 
-  // Cantidad por página
   const charactersPerPage = 10;
 
-  // Total de páginas
   const totalPages = Math.ceil(characters.length / charactersPerPage);
 
-  // Índices
   const start = (currentPage - 1) * charactersPerPage;
 
   const end = start + charactersPerPage;
 
-  // Personajes paginados
   const paginatedCharacters = characters.slice(start, end);
 
   container.innerHTML = `
@@ -31,6 +27,8 @@ export async function renderCharactersView(container) {
           Personajes
         </h2>
       </div>
+      <button id="create-character" class="bg-green-500 text-white px-4 py-2 rounded-lg mb-6">
+      Crear personaje</button>
 
       <!-- Grid -->
       <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 place-items-center">
