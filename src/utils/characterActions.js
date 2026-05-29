@@ -1,13 +1,47 @@
 import {
   deleteCharacterView,
   editCharacterView,
+  createCharacterView,
   appState,
 } from "../services/crud.js";
 
 import { renderCharactersView } from "../views/charactersView.js";
-
 import { renderEditCharacterView } from "../views/editCharacterView.js";
-import { renderCreateCharacterView } from "../views/createCharacterView.js";
+import { CreateCharacterForm } from "../components/characterForm.js";
+
+function getViewContainer() {
+  return document.querySelector("#view-container");
+}
+
+function openCreateModal() {
+  document.body.insertAdjacentHTML("beforeend", CreateCharacterForm());
+
+  const modal = document.querySelector("#create-modal");
+  const form = document.querySelector("#form-create");
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.remove();
+    }
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+
+    createCharacterView(
+      formData.get("name"),
+      formData.get("species"),
+      formData.get("gender"),
+      formData.get("status"),
+      formData.get("imgUrl"),
+    );
+
+    modal.remove();
+    await renderCharactersView(getViewContainer());
+  });
+}
 
 export function setupCharacterActions() {
   document.addEventListener("click", async (event) => {
@@ -16,33 +50,32 @@ export function setupCharacterActions() {
     if (!button) return;
 
     const action = button.dataset.action;
-
     const id = Number(button.dataset.id);
+    const container = getViewContainer();
 
-    const container = document.querySelector("#app");
-
-    // ELIMINAR
+    if (action === "create") {
+      openCreateModal();
+      return;
+    }
 
     if (action === "delete") {
       deleteCharacterView(id);
-
       await renderCharactersView(container);
-
-      console.log(`Personaje ${id} eliminado`);
+      return;
     }
-
-    // EDITAR
 
     if (action === "edit") {
       const character = appState.characters.find(
         (character) => character.id === id,
       );
 
-      const modalHTML = renderEditCharacterView(character);
-
-      document.body.insertAdjacentHTML("beforeend", modalHTML);
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        renderEditCharacterView(character),
+      );
 
       const modal = document.querySelector("#edit-modal");
+      const form = document.querySelector("#form-edit");
 
       modal.addEventListener("click", (event) => {
         if (event.target === modal) {
@@ -50,26 +83,17 @@ export function setupCharacterActions() {
         }
       });
 
-      const form = document.querySelector("#form-edit");
-
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const formData = new FormData(form);
-
-        const id = Number(formData.get("id-character"));
-
+        const characterId = Number(formData.get("id-character"));
         const newName = formData.get("new-name");
-
         const newState = formData.get("new-state");
 
-        editCharacterView(id, newName, newState);
-
+        editCharacterView(characterId, newName, newState);
         modal.remove();
-
         await renderCharactersView(container);
-
-        console.log(`Personaje ${id} editado`);
       });
     }
   });
