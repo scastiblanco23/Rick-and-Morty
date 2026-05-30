@@ -26,7 +26,6 @@ export async function saveAppState() {
 
     localStorage.setItem("episodes", JSON.stringify(appState.episodes));
   }
-
   const localLocations = localStorage.getItem("locations");
 
   if (localLocations) {
