@@ -1,49 +1,49 @@
 const API_BASE_URL = "https://rickandmortyapi.com/api";
 
 export async function getCharacters() {
-  const ids = Array.from({ length: 826 }, (_, index) => index + 1);
+  let characters = [];
+  let urlNext = `${API_BASE_URL}/character`;
 
-  const listaIds = ids.join(",");
+  while (urlNext) {
+    const response = await fetch(urlNext);
+    const data = response.json();
 
-  const respuesta = await fetch(`${API_BASE_URL}/character/${listaIds}`);
-  const todosLosPersonajes = await respuesta.json();
+    characters = characters.concat(data.results);
 
-  console.log(
-    `¡Listo! Traídos ${todosLosPersonajes.length} personajes de un solo viaje.`,
-  );
-  return todosLosPersonajes;
+    urlNext = data.info.next;
+  }
+
+  return characters;
 }
 
 export async function getEpisodes() {
-  const ids = Array.from({ length: 51 }, (_, index) => index + 1);
+  let episodes = [];
+  let urlNext = `https://rickandmortyapi.com/api/episode`;
 
-  const listaIds = ids.join(",");
+  while (urlNext) {
+    const response = await fetch(urlNext);
+    const data = await response.json();
+    episodes = episodes.concat(data.results);
 
-  const respuesta = await fetch(`${API_BASE_URL}/episode/${listaIds}`);
+    urlNext = data.info.next;
+  }
 
-  const todosLosEpisodios = await respuesta.json();
-
-  console.log(
-    `¡Listo! Traídos ${todosLosEpisodios.length} episodios de un solo viaje.`,
-  );
-
-  return todosLosEpisodios;
+  return episodes;
 }
 
 export async function getLocations() {
-  const ids = Array.from({ length: 126 }, (_, index) => index + 1);
+  let locations = [];
+  let urlNext = `https://rickandmortyapi.com/api/location`;
 
-  const listaIds = ids.join(",");
+  while (urlNext) {
+    const response = await fetch(urlNext);
+    const data = await response.json();
+    locations = locations.concat(data.results);
 
-  const respuesta = await fetch(`${API_BASE_URL}/location/${listaIds}`);
+    urlNext = data.info.next;
+  }
 
-  const todasLasLocations = await respuesta.json();
-
-  console.log(
-    `¡Listo! Traídas ${todasLasLocations.length} locations de un solo viaje.`,
-  );
-
-  return todasLasLocations;
+  return locations;
 }
 
 export { API_BASE_URL };

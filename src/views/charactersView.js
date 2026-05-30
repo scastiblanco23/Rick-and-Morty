@@ -29,7 +29,7 @@ export async function renderCharactersView(container) {
       <button
         type="button"
         data-action="create"
-        class="bg-green-500 text-white px-4 py-2 rounded-lg mb-6"
+        class="bg-green-500 cursor-pointer text-white px-4 py-2 rounded-lg mb-6"
       >
         Crear personaje
       </button>
