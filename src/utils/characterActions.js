@@ -59,9 +59,17 @@ export function setupCharacterActions() {
     }
 
     if (action === "delete") {
-      deleteCharacterView(id);
-      await renderCharactersView(container);
-      return;
+      const sure = confirm(
+        "¿Seguro que quieres eliminar este personaje del multiverso?",
+      );
+
+      if (sure) {
+        deleteCharacterView(id);
+        await renderCharactersView(container);
+        return;
+      } else {
+        return;
+      }
     }
 
     if (action === "edit") {
