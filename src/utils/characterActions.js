@@ -8,6 +8,7 @@ import {
 import { renderCharactersView } from "../views/charactersView.js";
 import { renderEditCharacterView } from "../views/editCharacterView.js";
 import { CreateCharacterForm } from "../components/characterForm.js";
+import { confirmDelete } from "../components/confirmDelete.js";
 
 function getViewContainer() {
   return document.querySelector("#view-container");
@@ -59,17 +60,25 @@ export function setupCharacterActions() {
     }
 
     if (action === "delete") {
-      const sure = confirm(
-        "¿Seguro que quieres eliminar este personaje del multiverso?",
-      );
+      document.body.insertAdjacentHTML("beforeend", confirmDelete(id));
+      const modal = document.querySelector("#delete-modal");
+      const btnCancelar = document.querySelector("#btn-cancelar-delete");
+      const btnConfirmar = document.querySelector("#btn-confirmar-delete");
 
-      if (sure) {
+      btnCancelar.addEventListener("click", () => modal.remove());
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) modal.remove();
+      });
+
+      btnConfirmar.addEventListener("click", async () => {
         deleteCharacterView(id);
+
+        modal.remove();
+
         await renderCharactersView(container);
-        return;
-      } else {
-        return;
-      }
+      });
+
+      return;
     }
 
     if (action === "edit") {

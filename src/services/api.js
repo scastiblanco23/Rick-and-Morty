@@ -1,8 +1,8 @@
 const API_BASE_URL = "https://rickandmortyapi.com/api";
 
 export async function getCharacters() {
-  const characters = [];
-  const urlNext = `${API_BASE_URL}/character`;
+  let characters = [];
+  let urlNext = `${API_BASE_URL}/character`;
 
   while (urlNext) {
     const response = await fetch(urlNext);
@@ -17,35 +17,33 @@ export async function getCharacters() {
 }
 
 export async function getEpisodes() {
-  const characters = [];
-  const urlNext = `${API_BASE_URL}/episode`;
+  let episodes = [];
+  let urlNext = `https://rickandmortyapi.com/api/episode`;
 
   while (urlNext) {
     const response = await fetch(urlNext);
-    const data = response.json();
-
-    characters = characters.concat(data.results);
+    const data = await response.json();
+    episodes = episodes.concat(data.results);
 
     urlNext = data.info.next;
   }
 
-  return characters;
+  return episodes;
 }
 
 export async function getLocations() {
-  const ids = Array.from({ length: 126 }, (_, index) => index + 1);
+  let locations = [];
+  let urlNext = `https://rickandmortyapi.com/api/location`;
 
-  const listaIds = ids.join(",");
+  while (urlNext) {
+    const response = await fetch(urlNext);
+    const data = await response.json();
+    locations = locations.concat(data.results);
 
-  const respuesta = await fetch(`${API_BASE_URL}/location/${listaIds}`);
+    urlNext = data.info.next;
+  }
 
-  const todasLasLocations = await respuesta.json();
-
-  console.log(
-    `¡Listo! Traídas ${todasLasLocations.length} locations de un solo viaje.`,
-  );
-
-  return todasLasLocations;
+  return locations;
 }
 
 export { API_BASE_URL };
