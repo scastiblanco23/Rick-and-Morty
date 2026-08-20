@@ -5,7 +5,7 @@ import { renderEpisodesView } from "../views/episodesView.js";
 import { renderLocationsView } from "../views/locationsView.js";
 
 const routes = {
-  "#/personajes": renderCharactersView,
+  "#/personaje": renderCharactersView,
   "#/episodios": renderEpisodesView,
   "#/locaciones": renderLocationsView,
 };

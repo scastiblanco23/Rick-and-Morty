@@ -5,7 +5,7 @@ import { Pagination } from "../components/pagination.js";
 let currentPage = 1;
 
 export async function renderCharactersView(container) {
-  const characters = appState.characters;
+  const characters = appState.character;
 
   const charactersPerPage = 10;
 
